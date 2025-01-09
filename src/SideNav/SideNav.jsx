@@ -32,6 +32,18 @@ const SideNav = () => {
           </li>
           <li>
             <NavLink
+              to={`/users`}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-red-500 underline font-bold"
+                  : "text-blue-500 hover:underline"
+              }
+            >
+              Users
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to={`addCoffee`}
               className={({ isActive }) =>
                 isActive
@@ -40,18 +52,6 @@ const SideNav = () => {
               }
             >
               Add Coffee
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={`updateCoffee`}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-red-500 underline font-bold"
-                  : "text-blue-500 hover:underline"
-              }
-            >
-              Update Coffee
             </NavLink>
           </li>
         </ul>

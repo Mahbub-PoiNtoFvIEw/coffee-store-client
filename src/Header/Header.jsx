@@ -1,4 +1,5 @@
 import { FaRegCircleUser } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -7,7 +8,9 @@ const Header = () => {
         <div>
             <h2 className="text-3xl font-bold">@dminManager</h2>
         </div>
-        <div>
+        <div className="flex gap-2 items-center">
+            <Link to={`/signin`}><button className="btn font-bold">Sin In</button></Link>
+            <Link to={`/signup`}><button className="btn font-bold">Sin Up</button></Link>
             <FaRegCircleUser className="text-4xl"></FaRegCircleUser>
         </div>
     </div>
