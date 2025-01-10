@@ -5,6 +5,8 @@ import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
+import SideNav from "../SideNav/SideNav";
 
 const Users = () => {
   const loadedUsers = useLoaderData();
@@ -43,8 +45,14 @@ const Users = () => {
   };
 
   return (
-    <div>
-      <div className="overflow-x-auto bg-[#F4F3F0] px-8 py-1 rounded-xl">
+    <div className="md:max-w-7xl mx-auto grid grid-cols-5">
+      <Helmet>
+        <title>CoffeeStore | Users</title>
+      </Helmet>
+      <div>
+        <SideNav></SideNav>
+      </div>
+      <div className="overflow-x-auto bg-[#F4F3F0] px-8 py-1 rounded-xl col-span-4">
         <table className="table">
           {/* head */}
           <thead>

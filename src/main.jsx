@@ -13,6 +13,9 @@ import SignUp from "./components/signUp.jsx";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import Users from "./components/Users.jsx";
 import UpdateProfile from "./components/UpdateProfile.jsx";
+import PrivateRoutes from "./Routes/PrivateRoutes.jsx";
+import ViewCoffeeDetails from "./components/ViewCoffeeDetails.jsx";
+import AddJuice from "./components/AddJuice.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,16 +24,38 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/coffee"),
+        element: (
+          <PrivateRoutes>
+            <Home></Home>
+          </PrivateRoutes>
+        ),
+        loader: async () => {
+          const coffeeResponse = await fetch("http://localhost:5000/coffee");
+          const juiceResponse = await fetch("http://localhost:5000/juice");
+      
+          // Assuming both responses are in JSON format
+          const loadedCoffee = await coffeeResponse.json();
+          const loadedJuice = await juiceResponse.json();
+      
+          // Return an object with both coffee and juice data
+          return { loadedCoffee, loadedJuice };
+        },
       },
       {
         path: "/addCoffee",
-        element: <AddCoffee></AddCoffee>,
+        element: (
+          <PrivateRoutes>
+            <AddCoffee></AddCoffee>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/updateCoffee/:id",
-        element: <UpdateCoffee></UpdateCoffee>,
+        element: (
+          <PrivateRoutes>
+            <UpdateCoffee></UpdateCoffee>
+          </PrivateRoutes>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/coffee/${params.id}`),
       },
@@ -44,12 +69,34 @@ const router = createBrowserRouter([
       },
       {
         path: "/users",
-        element: <Users></Users>,
-        loader: () => fetch('http://localhost:5000/user')
+        element: (
+          <PrivateRoutes>
+            <Users></Users>
+          </PrivateRoutes>
+        ),
+        loader: () => fetch("http://localhost:5000/user"),
       },
       {
         path: "/updateProfile",
-        element: <UpdateProfile></UpdateProfile>
+        element: (
+          <PrivateRoutes>
+            <UpdateProfile></UpdateProfile>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/viewCoffeeDetails/:id",
+        element: (
+          <PrivateRoutes>
+            <ViewCoffeeDetails></ViewCoffeeDetails>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/coffee/${params.id}`),
+      },
+      {
+        path: "/addJuice",
+        element: <AddJuice></AddJuice>
       }
     ],
   },

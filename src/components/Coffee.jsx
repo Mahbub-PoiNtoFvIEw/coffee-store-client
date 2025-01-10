@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { FaEye } from "react-icons/fa6";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -21,8 +22,8 @@ const Coffee = ({ aCoffee, coffees, setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/coffee/${id}`,{
-          method: 'DELETE'
+        fetch(`http://localhost:5000/coffee/${id}`, {
+          method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
@@ -33,7 +34,7 @@ const Coffee = ({ aCoffee, coffees, setCoffees }) => {
                 text: "Your coffee has been deleted.",
                 icon: "success",
               });
-              const remaining = coffees.filter(cof => cof._id !== id)
+              const remaining = coffees.filter((cof) => cof._id !== id);
               setCoffees(remaining);
             }
           });
@@ -42,6 +43,9 @@ const Coffee = ({ aCoffee, coffees, setCoffees }) => {
   };
   return (
     <div className="card card-side bg-[#F5F4F1] shadow-xl">
+      <Helmet>
+        <title>CoffeeStore | Coffee</title>
+      </Helmet>
       <figure>
         <img src={photo} alt="Movie" />
       </figure>
@@ -52,18 +56,14 @@ const Coffee = ({ aCoffee, coffees, setCoffees }) => {
         <p>
           <span className="font-bold">Quantity</span> : {quantity}
         </p>
-        <p>
-          <span className="font-bold">Price</span> : {price} Taka
-        </p>
-        <p>
-          <span className="font-bold">Test</span> : {test}
-        </p>
         <p>{details}</p>
       </div>
       <div className="card-body text-xl text-[#FFFFFF] my-auto">
-        <button className="bg-[#D2B48C] p-1 rounded-md">
-          <FaEye></FaEye>
-        </button>
+        <Link to={`/viewCoffeeDetails/${_id}`}>
+          <button className="bg-[#D2B48C] p-1 rounded-md">
+            <FaEye></FaEye>
+          </button>
+        </Link>
         <Link to={`/updateCoffee/${_id}`}>
           <button className="bg-[#3C393B] p-1 rounded-md">
             <MdModeEdit></MdModeEdit>

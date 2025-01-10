@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import backHomeIcon from "../../src/assets/Group 44.png";
+import { Helmet } from "react-helmet";
+import SideNav from "../SideNav/SideNav";
 
 const UpdateCoffee = () => {
   const coffee = useLoaderData();
@@ -57,8 +59,14 @@ const UpdateCoffee = () => {
   };
 
   return (
-    <div className="px-32 py-4">
-      <div className="bg-[#F4F3F0] px-8 py-1 rounded-xl">
+    <div className="md:max-w-7xl mx-auto grid grid-cols-5">
+      <Helmet>
+        <title>CoffeeStore | UpdateCoffee</title>
+      </Helmet>
+      <div>
+        <SideNav></SideNav>
+      </div>
+      <div className="bg-[#F4F3F0] px-8 py-1 rounded-xl col-span-4">
         <Link to={`/`}><img className="w-32" src={backHomeIcon} alt="" /></Link>
         <div className="text-center space-y-3 mb-4">
           <h2 className="text-3xl font-extrabold">Update a Coffee</h2>

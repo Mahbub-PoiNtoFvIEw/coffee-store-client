@@ -1,14 +1,13 @@
 import React from "react";
-import Swal from "sweetalert2";
+import SideNav from "../SideNav/SideNav";
+import { Helmet } from "react-helmet";
 import backHomeIcon from "../../src/assets/Group 44.png";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
-import SideNav from "../SideNav/SideNav";
+import Swal from "sweetalert2";
 
-const AddCoffee = () => {
-  const handleAddCoffee = (e) => {
+const AddJuice = () => {
+  const handelAddJuice = (e) => {
     e.preventDefault();
-
     const form = e.target;
 
     const name = form.name.value;
@@ -20,7 +19,7 @@ const AddCoffee = () => {
     const details = form.details.value;
     const photo = form.photo.value;
 
-    const newCoffee = {
+    const newJuice = {
       name,
       quantity,
       price,
@@ -30,15 +29,14 @@ const AddCoffee = () => {
       details,
       photo,
     };
-    console.log(newCoffee);
+    console.log(newJuice);
 
-    // send data to the server
-    fetch("http://localhost:5000/coffee", {
+    fetch("http://localhost:5000/juice", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newCoffee),
+      body: JSON.stringify(newJuice),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -46,26 +44,27 @@ const AddCoffee = () => {
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",
-            text: "Added coffee successfully",
+            text: "Added new juice successfully",
             icon: "success",
             confirmButtonText: "Ok",
           });
         }
       });
   };
-
   return (
     <div className="md:max-w-7xl mx-auto grid grid-cols-5">
       <Helmet>
-        <title>CoffeeStore | AddCoffee</title>
+        <title>CoffeeStore | AddDrink</title>
       </Helmet>
       <div>
         <SideNav></SideNav>
       </div>
       <div className="bg-[#F4F3F0] px-8 py-1 rounded-xl col-span-4">
-      <Link to={`/`}><img className="w-32" src={backHomeIcon} alt="" /></Link>
+        <Link to={`/`}>
+          <img className="w-32" src={backHomeIcon} alt="" />
+        </Link>
         <div className="text-center space-y-3 mb-4">
-          <h2 className="text-3xl font-extrabold">Add a Coffee</h2>
+          <h2 className="text-3xl font-extrabold">Add a juice</h2>
           <p>
             It is a long established fact that a reader will be distraceted by
             the readable content of a page when looking at its layout. The point
@@ -73,16 +72,16 @@ const AddCoffee = () => {
             distribution of letters, as opposed to using Content here.
           </p>
         </div>
-        <form onSubmit={handleAddCoffee}>
+        <form onSubmit={handelAddJuice}>
           {/* form name and quantity row */}
           <div className="md:flex gap-2">
             <label className="form-control md:w-1/2">
               <div className="label">
-                <span className="label-text">Coffee Name</span>
+                <span className="label-text">Juice Name</span>
               </div>
               <input
                 type="text"
-                placeholder="Coffee Name"
+                placeholder="Juice Name"
                 name="name"
                 className="input input-bordered w-full"
               />
@@ -178,7 +177,7 @@ const AddCoffee = () => {
           </div>
           <input
             type="submit"
-            value="Add Coffee"
+            value="Add New Juice"
             className="btn btn-block my-4 bg-[#D2B48C]"
           />
         </form>
@@ -187,4 +186,4 @@ const AddCoffee = () => {
   );
 };
 
-export default AddCoffee;
+export default AddJuice;

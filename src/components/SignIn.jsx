@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {signInUser} = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -18,6 +21,7 @@ const SignIn = () => {
     signInUser(email, password)
     .then(result=>{
         console.log(result.user);
+        navigate('/');
         const user = {
             email,
             lastLoginTime: result.user?.metadata?.lastSignInTime
@@ -37,7 +41,10 @@ const SignIn = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-[#F4F3F0] rounded-xl">
+    <div className="md:max-w-7xl mx-auto hero min-h-screen bg-[#F4F3F0] rounded-xl">
+      <Helmet>
+        <title>CoffeeStore | Signin</title>
+      </Helmet>
       <div className="hero-content flex-col">
         <div className="text-center">
           <h1 className="text-3xl font-bold">SignIn now!</h1>
