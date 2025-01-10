@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaList } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const SideNav = () => {
     const [showNav, setShowNav] = useState(false);
+    const {logOut} = useContext(AuthContext)
+    const handleSignOut = () =>{
+      logOut();
+    }
   return (
     <div className="relative top-4">
       <FaList
@@ -53,6 +59,32 @@ const SideNav = () => {
             >
               Add Coffee
             </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={`updateProfile`}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-red-500 underline font-bold"
+                  : "text-blue-500 hover:underline"
+              }
+            >
+              Update Profile
+            </NavLink>
+          </li>
+          <li>
+            <button onClick={handleSignOut} className="text-blue-500 hover:underline">Sign Out</button>
+            {/* <NavLink
+              onClick={handleSignOut}
+              to={`/signin`}
+              className={({ isActive }) =>
+                isActive
+                  ? "text-red-500 underline font-bold"
+                  : "text-blue-500 hover:underline"
+              }
+            >
+              Sign Out
+            </NavLink> */}
           </li>
         </ul>
       </div>
