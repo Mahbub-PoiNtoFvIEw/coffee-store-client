@@ -52,14 +52,14 @@ const AddJuice = () => {
       });
   };
   return (
-    <div className="md:max-w-7xl mx-auto grid grid-cols-5">
+    <div className="md:max-w-7xl mx-auto md:grid grid-cols-5">
       <Helmet>
         <title>CoffeeStore | AddDrink</title>
       </Helmet>
       <div>
         <SideNav></SideNav>
       </div>
-      <div className="bg-[#F4F3F0] px-8 py-1 rounded-xl col-span-4">
+      <div className="bg-[#F4F3F0] mx-4 px-8 py-1 rounded-xl col-span-4">
         <Link to={`/`}>
           <img className="w-32" src={backHomeIcon} alt="" />
         </Link>

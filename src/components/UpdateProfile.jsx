@@ -25,7 +25,7 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="md:max-w-7xl mx-auto grid grid-cols-5">
+    <div className="md:max-w-7xl mx-auto md:grid grid-cols-5">
       <Helmet>
         <title>CoffeeStore | UpdateProfile</title>
       </Helmet>

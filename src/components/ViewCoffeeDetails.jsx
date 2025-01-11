@@ -22,7 +22,7 @@ const ViewCoffeeDetails = () => {
             <img className="w-32 pl-2 pt-2" src={backHomeIcon} alt="" />
           </Link>
           <figure>
-            <img src={photo} alt="Shoes" />
+            <img src={photo} alt="coffee" />
           </figure>
           <div className="card-body">
             <h2 className="card-title">

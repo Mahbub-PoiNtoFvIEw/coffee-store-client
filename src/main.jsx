@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Root from "./Root/Root.jsx";
 import Home from "./Home/Home.jsx";
 import AddCoffee from "./components/AddCoffee.jsx";
@@ -16,6 +16,8 @@ import UpdateProfile from "./components/UpdateProfile.jsx";
 import PrivateRoutes from "./Routes/PrivateRoutes.jsx";
 import ViewCoffeeDetails from "./components/ViewCoffeeDetails.jsx";
 import AddJuice from "./components/AddJuice.jsx";
+import Coffee from "./components/Coffee.jsx";
+import Juice from "./components/Juice.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,22 +26,26 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
+        element: 
           <PrivateRoutes>
             <Home></Home>
-          </PrivateRoutes>
-        ),
-        loader: async () => {
-          const coffeeResponse = await fetch("http://localhost:5000/coffee");
-          const juiceResponse = await fetch("http://localhost:5000/juice");
-      
-          // Assuming both responses are in JSON format
-          const loadedCoffee = await coffeeResponse.json();
-          const loadedJuice = await juiceResponse.json();
-      
-          // Return an object with both coffee and juice data
-          return { loadedCoffee, loadedJuice };
-        },
+          </PrivateRoutes>,
+        children: [
+          {
+            path: "",
+            element: <Navigate to={`/coffee`}></Navigate>
+          },
+          {
+            path: "/coffee",
+            element: <Coffee></Coffee>,
+            loader: () => fetch("http://localhost:5000/coffee"),
+          },
+          {
+            path: "/juice",
+            element: <Juice></Juice>,
+            loader: () => fetch("http://localhost:5000/juice"),
+          },
+        ],
       },
       {
         path: "/addCoffee",

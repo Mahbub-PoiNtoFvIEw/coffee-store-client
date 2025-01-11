@@ -1,0 +1,38 @@
+nav {
+    display: flex;
+    border-bottom: 1px solid #d1d5db; /* Default bottom border for the tab bar */
+    position: relative; /* Needed for z-index stacking */
+  }
+  
+  /* Active tab */
+  .chrome-tab-active {
+    background: white;
+    color: #1a1a1a; /* Dark text */
+    font-weight: bold;
+    border: 1px solid #d1d5db; /* Adds top, left, and right border */
+    border-bottom: none; /* Removes bottom border for active tab */
+    border-radius: 6px 6px 0 0; /* Rounded corners */
+    padding: 0.5rem 1rem; /* Spacing inside the tab */
+    position: relative; /* Needed to adjust stacking */
+    z-index: 1; /* Makes the active tab appear on top of the border */
+  }
+  
+  /* Inactive tabs */
+  .chrome-tab-inactive {
+    background: #f3f4f6; /* Light gray background */
+    color: #6b7280; /* Muted text color */
+    border: 1px solid transparent; /* No visible border */
+    border-radius: 6px 6px 0 0; /* Rounded corners */
+    padding: 0.5rem 1rem; /* Spacing inside the tab */
+  }
+  
+  /* Hover effect for inactive tabs */
+  .chrome-tab-inactive:hover {
+    background: #e5e7eb; /* Slightly darker gray */
+    color: #374151; /* Darker text */
+  }
+  
+  /* Adjust tab spacing to remove double borders */
+  .chrome-tab-active + .chrome-tab-inactive {
+    margin-left: -1px; /* Fixes overlap of side borders */
+  }
