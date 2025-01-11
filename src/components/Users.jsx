@@ -47,7 +47,7 @@ const Users = () => {
   return (
     <div className="md:max-w-7xl mx-auto md:grid grid-cols-5">
       <Helmet>
-        <title>CoffeeStore | Users</title>
+        <title>DrinksStore | Users</title>
       </Helmet>
       <div>
         <SideNav></SideNav>

@@ -4,10 +4,43 @@ import { FaEye } from "react-icons/fa6";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2";
 
 const Juice = () => {
   const loadedJuice = useLoaderData();
   const [juices, setJuices] = useState(loadedJuice);
+  console.log(juices);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/juice/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your juice has been deleted.",
+                icon: "success",
+              });
+              const remaining = juices.filter((cof) => cof._id !== id);
+              setJuices(remaining);
+            }
+          });
+      }
+    });
+  };
   return (
     <div>
       <Helmet>
@@ -37,12 +70,12 @@ const Juice = () => {
                   <p>{juice.details}</p>
                 </div>
                 <div className="text-xl text-[#FFFFFF] my-auto flex flex-col">
-                  <Link to={`/viewCoffeeDetails/${juice._id}`}>
+                  <Link to={`/viewJuiceDetails/${juice._id}`}>
                     <button className="bg-[#D2B48C] p-1 rounded-md">
                       <FaEye></FaEye>
                     </button>
                   </Link>
-                  <Link to={`/updateCoffee/${juice._id}`}>
+                  <Link to={`/updateJuice/${juice._id}`}>
                     <button className="bg-[#3C393B] p-1 rounded-md">
                       <MdModeEdit></MdModeEdit>
                     </button>

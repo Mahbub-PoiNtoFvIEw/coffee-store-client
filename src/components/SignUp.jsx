@@ -7,6 +7,8 @@ import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [passValidation, setPassValidation] = useState("");
+  const [userExist, setUserExist] = useState("");
   const { createUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -19,6 +21,21 @@ const SignUp = () => {
     const password = form.password.value;
     const photo = form.photo.value;
     console.log(name, email, password, photo);
+    setPassValidation("");
+    setUserExist("");
+
+    if(password.length <8){
+      setPassValidation('Password must be 8 character or longer');
+      return;
+    }
+    if(!/(?=.*[A-Z])/.test(password)){
+      setPassValidation("Ensures at least one uppercase letter");
+      return;
+    }
+    if(!/(?=.*[a-zA-Z])/.test(password)){
+      setPassValidation("Ensures at least one letter");
+      return;
+    }
 
     createUser(email, password)
       .then((result) => {
@@ -44,11 +61,13 @@ const SignUp = () => {
                 icon: "success",
                 confirmButtonText: "Ok",
               });
+              form.reset();
             }
           });
       })
       .catch((error) => {
         console.error(error.message);
+        setUserExist("Email already in used")
       });
   };
 
@@ -108,6 +127,7 @@ const SignUp = () => {
                 )}
               </div>
             </div>
+            <p className="text-red-600 font-bold">{passValidation}</p>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Photo</span>
@@ -122,6 +142,7 @@ const SignUp = () => {
             <div className="form-control mt-6">
               <button className="btn bg-[#D2B48C]">Sign Up</button>
             </div>
+            <p className="text-red-600 font-bold">{userExist}</p>
           </form>
           <div className="px-8 mb-6">
             <p>

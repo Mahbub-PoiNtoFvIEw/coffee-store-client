@@ -50,6 +50,7 @@ const AddCoffee = () => {
             icon: "success",
             confirmButtonText: "Ok",
           });
+          form.reset();
         }
       });
   };
@@ -57,7 +58,7 @@ const AddCoffee = () => {
   return (
     <div className="md:max-w-7xl mx-auto md:grid grid-cols-5">
       <Helmet>
-        <title>CoffeeStore | AddCoffee</title>
+        <title>DrinksStore | AddCoffee</title>
       </Helmet>
       <div>
         <SideNav></SideNav>

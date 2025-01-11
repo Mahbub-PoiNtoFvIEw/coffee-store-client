@@ -1,13 +1,26 @@
 import React from "react";
-import SideNav from "../SideNav/SideNav";
-import { Helmet } from "react-helmet";
 import backHomeIcon from "../../src/assets/Group 44.png";
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import SideNav from "../SideNav/SideNav";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddJuice = () => {
-  const handelAddJuice = (e) => {
+const UpdateJuice = () => {
+  const juice = useLoaderData();
+  const {
+    _id,
+    name,
+    quantity,
+    price,
+    supplier,
+    test,
+    details,
+    photo,
+    category,
+  } = juice;
+  const handleUpdateJuice = (e) => {
     e.preventDefault();
+
     const form = e.target;
 
     const name = form.name.value;
@@ -19,7 +32,7 @@ const AddJuice = () => {
     const details = form.details.value;
     const photo = form.photo.value;
 
-    const newJuice = {
+    const updatedJuice = {
       name,
       quantity,
       price,
@@ -29,43 +42,42 @@ const AddJuice = () => {
       details,
       photo,
     };
-    console.log(newJuice);
+    console.log(updatedJuice);
 
-    fetch("http://localhost:5000/juice", {
-      method: "POST",
+    fetch(`http://localhost:5000/juice/${_id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newJuice),
+      body: JSON.stringify(updatedJuice),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.insertedId) {
+        if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Success!",
-            text: "Added new juice successfully",
+            text: "Juice updated successfully",
             icon: "success",
             confirmButtonText: "Ok",
           });
-          form.reset();
         }
       });
   };
   return (
-    <div className="md:max-w-7xl mx-auto md:grid grid-cols-5">
+    <div className="md:max-w-7xl mx-auto grid grid-cols-5">
       <Helmet>
-        <title>DrinksStore | AddJuice</title>
+        <title>DrinksStore | UpdateCoffee</title>
       </Helmet>
       <div>
         <SideNav></SideNav>
       </div>
-      <div className="bg-[#F4F3F0] mx-2 px-8 py-1 rounded-xl col-span-4">
+      <div className="bg-[#F4F3F0] px-8 py-1 rounded-xl col-span-4">
         <Link to={`/juice`}>
           <img className="w-32" src={backHomeIcon} alt="" />
         </Link>
         <div className="text-center space-y-3 mb-4">
-          <h2 className="text-3xl font-extrabold">Add a juice</h2>
+          <h2 className="text-3xl font-extrabold">Update a Juice</h2>
           <p>
             It is a long established fact that a reader will be distraceted by
             the readable content of a page when looking at its layout. The point
@@ -73,7 +85,7 @@ const AddJuice = () => {
             distribution of letters, as opposed to using Content here.
           </p>
         </div>
-        <form onSubmit={handelAddJuice}>
+        <form onSubmit={handleUpdateJuice}>
           {/* form name and quantity row */}
           <div className="md:flex gap-2">
             <label className="form-control md:w-1/2">
@@ -82,8 +94,9 @@ const AddJuice = () => {
               </div>
               <input
                 type="text"
-                placeholder="Juice Name"
+                placeholder="Coffee Name"
                 name="name"
+                defaultValue={name}
                 className="input input-bordered w-full"
               />
             </label>
@@ -95,6 +108,7 @@ const AddJuice = () => {
                 <input
                   type="text"
                   name="quantity"
+                  defaultValue={quantity}
                   placeholder="Available Quantity"
                   className="input input-bordered w-full"
                 />
@@ -106,6 +120,7 @@ const AddJuice = () => {
                 <input
                   type="text"
                   name="price"
+                  defaultValue={price}
                   placeholder="Price"
                   className="input input-bordered w-full"
                 />
@@ -122,6 +137,7 @@ const AddJuice = () => {
                 type="text"
                 placeholder="Supplier Name"
                 name="supplier"
+                defaultValue={supplier}
                 className="input input-bordered w-full"
               />
             </label>
@@ -132,6 +148,7 @@ const AddJuice = () => {
               <input
                 type="text"
                 name="test"
+                defaultValue={test}
                 placeholder="Test"
                 className="input input-bordered w-full"
               />
@@ -147,6 +164,7 @@ const AddJuice = () => {
                 type="text"
                 placeholder="Category"
                 name="category"
+                defaultValue={category}
                 className="input input-bordered w-full"
               />
             </label>
@@ -157,6 +175,7 @@ const AddJuice = () => {
               <input
                 type="text"
                 name="details"
+                defaultValue={details}
                 placeholder="Details"
                 className="input input-bordered w-full"
               />
@@ -172,13 +191,14 @@ const AddJuice = () => {
                 type="text"
                 placeholder="Photo Url"
                 name="photo"
+                defaultValue={photo}
                 className="input input-bordered w-full"
               />
             </label>
           </div>
           <input
             type="submit"
-            value="Add New Juice"
+            value="Update Juice"
             className="btn btn-block my-4 bg-[#D2B48C]"
           />
         </form>
@@ -187,4 +207,4 @@ const AddJuice = () => {
   );
 };
 
-export default AddJuice;
+export default UpdateJuice;

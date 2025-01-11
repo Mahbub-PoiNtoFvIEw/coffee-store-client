@@ -61,7 +61,7 @@ const UpdateCoffee = () => {
   return (
     <div className="md:max-w-7xl mx-auto grid grid-cols-5">
       <Helmet>
-        <title>CoffeeStore | UpdateCoffee</title>
+        <title>DrinksStore | UpdateCoffee</title>
       </Helmet>
       <div>
         <SideNav></SideNav>

@@ -14,7 +14,7 @@ const SideNav = () => {
   };
   return (
     <div className="relative">
-      <div className=" flex gap-2 items-center">
+      <div className="flex gap-2 items-center">
         <FaList
           onClick={() => setShowNav(!showNav)}
           className="cursor-pointer text-4xl text-slate-500 mt-2 ml-2 p-1 md:block hidden"
@@ -22,13 +22,11 @@ const SideNav = () => {
         <h2 className="font-bold md:block hidden text-2xl">AdminPanel</h2>
       </div>
       <div
-        className={`duration-1000 md:absolute top-6 ${
-          !showNav ? "top-10" : "-left-48 top-10"
-        }`}
+        className={`md:absolute duration-1000 ${!showNav ? "left-0" : "-left-48"}`}
       >
         <ul className="md:pl-3 space-y-1 md:flex md:flex-col font-bold mt-2 mb-2">
           <div className="flex md:flex-col md:gap-1 gap-2 justify-evenly">
-            <li className="hover:bg-slate-100 rounded-lg px-8 py-1">
+            <li className="hover:bg-slate-100 rounded-lg px-6 py-1">
               <NavLink
                 to={`/`}
                 className={({ isActive }) =>
@@ -40,7 +38,7 @@ const SideNav = () => {
                 Home
               </NavLink>
             </li>
-            <li className="hover:bg-slate-100 rounded-lg px-8 py-1">
+            <li className="hover:bg-slate-100 rounded-lg px-6 py-1">
               <NavLink
                 to={`/users`}
                 className={({ isActive }) =>
@@ -52,7 +50,7 @@ const SideNav = () => {
                 Users
               </NavLink>
             </li>
-            <li className="hover:bg-slate-100 rounded-lg px-8 py-1">
+            <li className="hover:bg-slate-100 rounded-lg px-6 py-1">
               <NavLink
                 to={`/addCoffee`}
                 className={({ isActive }) =>
@@ -66,7 +64,7 @@ const SideNav = () => {
             </li>
           </div>
           <div className="flex md:flex-col md:gap-1 gap-2 justify-evenly">
-            <li className="hover:bg-slate-100 rounded-lg px-8 py-1">
+            <li className="hover:bg-slate-100 rounded-lg px-6 py-1">
               <NavLink
                 to={`/addJuice`}
                 className={({ isActive }) =>
@@ -78,7 +76,7 @@ const SideNav = () => {
                 Add Juice
               </NavLink>
             </li>
-            <li className="hover:bg-slate-100 rounded-lg px-8 py-1">
+            <li className="hover:bg-slate-100 rounded-lg px-6 py-1">
               <NavLink
                 to={`/updateProfile`}
                 className={({ isActive }) =>
@@ -90,7 +88,7 @@ const SideNav = () => {
                 Update Profile
               </NavLink>
             </li>
-            <li className="hover:bg-slate-100 rounded-lg px-8 py-1">
+            <li className="hover:bg-slate-100 rounded-lg px-6 py-1">
               <button
                 onClick={handleSignOut}
                 className="text-blue-500 hover:underline"

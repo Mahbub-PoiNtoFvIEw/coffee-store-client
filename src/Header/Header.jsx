@@ -5,7 +5,6 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const Header = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   return (
     <div className="md:max-w-7xl mx-auto">
       <div className="bg-slate-50 rounded-b-xl py-4 pr-8 pl-2 mb-4 flex justify-between items-center">

@@ -18,6 +18,8 @@ import ViewCoffeeDetails from "./components/ViewCoffeeDetails.jsx";
 import AddJuice from "./components/AddJuice.jsx";
 import Coffee from "./components/Coffee.jsx";
 import Juice from "./components/Juice.jsx";
+import ViewJuiceDetails from "./components/ViewJuiceDetails.jsx";
+import UpdateJuice from "./components/UpdateJuice.jsx";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +105,26 @@ const router = createBrowserRouter([
       {
         path: "/addJuice",
         element: <AddJuice></AddJuice>
+      },
+      {
+        path: "/viewJuiceDetails/:id",
+        element: (
+          <PrivateRoutes>
+            <ViewJuiceDetails></ViewJuiceDetails>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/juice/${params.id}`),
+      },
+      {
+        path: "/updateJuice/:id",
+        element: (
+          <PrivateRoutes>
+            <UpdateJuice></UpdateJuice>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/juice/${params.id}`),
       }
     ],
   },

@@ -1,27 +1,23 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import SideNav from "../SideNav/SideNav";
-import { Link, useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { Link, useLoaderData } from 'react-router-dom';
+import SideNav from '../SideNav/SideNav';
 import backHomeIcon from "../../src/assets/Group 44.png";
 
-const ViewCoffeeDetails = () => {
-  const coffee = useLoaderData();
-  const { _id, name, quantity, price, supplier, test, details, photo, category } = coffee;
-  console.log("coffee from coffee details", coffee);
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  console.log(location)
-  return (
-    <div className="md:max-w-7xl mx-auto grid grid-cols-5">
+const ViewJuiceDetails = () => {
+    const juice = useLoaderData();
+    const { _id, name, quantity, price, supplier, test, details, photo, category } = juice;
+    return (
+        <div className="md:max-w-7xl mx-auto grid grid-cols-5">
       <Helmet>
-        <title>DrinksStore | CoffeeDetails</title>
+        <title>DrinksStore | JuiceDetails</title>
       </Helmet>
       <div>
         <SideNav></SideNav>
       </div>
       <div className="col-span-4 md:w-2/3 mx-auto">
         <div className="card bg-[#F4F3F0] shadow-xl">
-          <Link to={`/coffee`}>
+          <Link to={`/juice`}>
             <img className="w-32 pl-2 pt-2" src={backHomeIcon} alt="" />
           </Link>
           <figure>
@@ -53,7 +49,7 @@ const ViewCoffeeDetails = () => {
         </div>
       </div>
     </div>
-  );
+    );
 };
 
-export default ViewCoffeeDetails;
+export default ViewJuiceDetails;
