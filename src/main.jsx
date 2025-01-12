@@ -9,7 +9,6 @@ import Home from "./Home/Home.jsx";
 import AddCoffee from "./components/AddCoffee.jsx";
 import UpdateCoffee from "./components/UpdateCoffee.jsx";
 import SignIn from "./components/signIn.jsx";
-import SignUp from "./components/signUp.jsx";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import Users from "./components/Users.jsx";
 import UpdateProfile from "./components/UpdateProfile.jsx";
@@ -20,6 +19,7 @@ import Coffee from "./components/Coffee.jsx";
 import Juice from "./components/Juice.jsx";
 import ViewJuiceDetails from "./components/ViewJuiceDetails.jsx";
 import UpdateJuice from "./components/UpdateJuice.jsx";
+import SignUp from "./components/SignUp.jsx";
 
 const router = createBrowserRouter([
   {
@@ -104,7 +104,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/addJuice",
-        element: <AddJuice></AddJuice>
+        element: <PrivateRoutes><AddJuice></AddJuice></PrivateRoutes>
       },
       {
         path: "/viewJuiceDetails/:id",

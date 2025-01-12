@@ -5,6 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const Header = () => {
   const { user } = useContext(AuthContext);
+  console.log(user)
   return (
     <div className="md:max-w-7xl mx-auto">
       <div className="bg-slate-50 rounded-b-xl py-4 pr-8 pl-2 mb-4 flex justify-between items-center">
@@ -23,12 +24,12 @@ const Header = () => {
               {user?.photoURL ? (
                 <img
                   className="w-12 h-12 rounded-full border-2 border-black p-1"
-                  src={user.photoURL}
+                  src={user?.photoURL}
                   alt=""
                 />
               ) : (
                 <p className="w-12 h-12 rounded-full border-2 border-black text-4xl text-center font-bold text-blue-600">
-                  {user?.email.charAt(0).toUpperCase()}
+                  {user?.email.charAt(0).toUpperCase() || user?.displayName.charAt(0).toUpperCase()}
                 </p>
               )}
             </div>
